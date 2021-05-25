@@ -22,16 +22,16 @@ def register():
     if send == "로그인":
         if result:
             if password == result[0][0]:
-                return "login"
+                return render_template("login.html")
             else:
-                return "wrong password"
+                return "잘못된 비밀번호"
         else:
             return "No Users Found"
     elif send == "회원가입":
         if result:
             return "학번 '{}' 가 이미 존재합니다.".format(id)
         else:
-            cur.execute("INSERT INTO student VALUES ('{}', '{}', 컴퓨터학과, 0, '{}')".format(id, id, password))
+            cur.execute("INSERT INTO student VALUES ('{}', '{}', '컴퓨터학과', 0, '{}')".format(id, id, password))
             connect.commit()
             return "학번 '{}' 이 회원가입 되었습니다.".format(id)
 
