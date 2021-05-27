@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import psycopg2
 
 connect = psycopg2.connect("dbname=sugang user=postgres password=postgres")
@@ -9,6 +9,12 @@ app = Flask(__name__)
 @app.route('/')
 def main():
     return render_template("main.html")
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    cur.execute("SELECT * from section")
+    result = cur.fetchall()
+    return render_template("login.html", sections=result)
 
 
 @app.route('/register', methods=['POST'])
@@ -22,7 +28,7 @@ def register():
     if send == "로그인":
         if result:
             if password == result[0][0]:
-                return render_template("login.html")
+                return redirect("/login")
             else:
                 return "잘못된 비밀번호"
         else:
