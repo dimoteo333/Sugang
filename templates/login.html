@@ -54,19 +54,61 @@
     </header>
 
     <br>
+    <h3>학번 {{student_id}}님의 정보</h3>
+    <p>현재 신청한 학점 : {{tot_credit}}학점</p>
+    <p>현재 신청한 과목 :
+        <table>
+            <thead>
+                <tr>
+                    <th>학수번호</th>
+                    <th>분반</th>
+                    <th>학기</th>
+                    <th>년도</th>
+                </tr>
+            </thead>
+        <tbody>
+            {% for course in course_take %}
+            <tr>
+                <td>{{ course[0] }}</td>
+                <td>{{ course[1] }}</td>
+                <td>{{ course[2] }}</td>
+                <td>{{ course[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+    </p>
+    <br>
     <table>
         <thead>
             <tr>
-                <th>개설된 과목</th>
+                <th>학수번호</th>
+                <th>분반</th>
+                <th>학기</th>
+                <th>년도</th>
+                <th>강의건물</th>
+                <th>강의실</th>
+                <th>수업시간</th>
+                <th>수업시간</th>
             </tr>
         </thead>
         <tbody>
             {% for section in sections %}
             <tr>
-                <td>{{ section }}</td>
+                <td>{{ section[0] }}</td>
+                <td>{{ section[1] }}</td>
+                <td>{{ section[2] }}</td>
+                <td>{{ section[3] }}</td>
+                <td>{{ section[4] }}</td>
+                <td>{{ section[5] }}</td>
+                <td>{{ section[6] }}</td>
+                <td>{{ section[7] }}</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
 </body>
+
+
+<a href="{{ url_for('enter')}}">수강신청 하러가기</a>
 </html>
